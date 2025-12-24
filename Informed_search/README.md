@@ -31,7 +31,7 @@ This agent establishes the foundation for planning by demonstrating how heuristi
 
 A* Planning Agent
 
-File: Astar_ghost.py
+File: Astar_Search_Ghost.py
 
 Description
 
