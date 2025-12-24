@@ -53,16 +53,6 @@ Purpose
 
 This agent demonstrates goal-directed planning, balancing search depth, computational efficiency, and decision quality.
 
-Algorithmic Comparison
-Capability	Best-First	A* Planning
-Heuristic Evaluation	✅	✅
-State Prediction	✅	✅
-Multi-Step Planning	❌	✅
-Search Frontier	Limited	Full
-Optimality Guarantees	❌	Heuristic-Dependent
-Computational Cost	Low	Moderate
-Engineering Focus
-
 Clean separation between evaluation, search, and control logic
 
 No modification of the underlying simulation framework
