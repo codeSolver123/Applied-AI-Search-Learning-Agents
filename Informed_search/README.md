@@ -53,6 +53,8 @@ Purpose
 
 This agent demonstrates goal-directed planning, balancing search depth, computational efficiency, and decision quality.
 
+Engineering Focus
+
 Clean separation between evaluation, search, and control logic
 
 No modification of the underlying simulation framework
