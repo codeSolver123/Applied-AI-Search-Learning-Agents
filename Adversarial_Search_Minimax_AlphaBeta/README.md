@@ -1,71 +1,109 @@
-# Adversarial Search AI Agent (Minimax with Alpha-Beta Pruning)
+Adversarial Search Agent — Minimax + Alpha-Beta)
+Overview
 
-## Overview
+This module implements an adversarial search AI agent using depth-limited Minimax enhanced with alpha-beta pruning and practical performance optimizations. The agent explicitly models an intelligent opponent and selects actions by anticipating adversarial responses.
 
-This module implements an **adversarial search–based artificial intelligence agent** using the **Minimax algorithm enhanced with alpha-beta pruning**.
+In addition to Minimax, the agent includes a fast tactical layer for immediate threats/opportunities and a hybrid evaluation function designed to stay stable in midgame while still reacting strongly to tactical swings.
 
-Unlike heuristic or informed-search agents that assume a passive environment, this agent explicitly models an **intelligent opponent** and selects actions by anticipating and countering adversarial behavior.
+File
 
-This demonstrates core concepts from **game theory, multi-agent systems, and strategic decision-making**, while maintaining real-time performance constraints.
+MiniMax_Gardner.py
 
----
+What the Agent Does
+1) Tactical Layer (fast rule-based decisions)
 
-## Minimax with Alpha-Beta Pruning Agent
+Before running search, the agent checks for high-value “micro” actions that should happen immediately, such as:
 
-**File:** `MiniMax_Gardner.py`
+moving the queen off the anthill if blocking production
 
-### Description
+attack-in-place if an enemy is already in range
 
-The agent performs a depth-limited Minimax search to evaluate future game states under optimal play by both itself and its opponent. Alpha-beta pruning is applied to significantly reduce the number of explored nodes, enabling deeper lookahead while maintaining computational efficiency.
+intercepting nearby threats (e.g., drones near hill/queen)
 
-Unlike simplified textbook examples, maximizing and minimizing decisions are determined dynamically based on **whose turn it is in the game state**, rather than strictly alternating by tree depth.
+maintaining basic economy (keeping a worker productive)
 
----
+building early attackers when the hill is free
 
-## Key Features
+If no clear tactical move is found, the agent falls back to adversarial search.
 
-- Depth-limited Minimax search (≥ 3 plies)
-- Alpha-beta pruning for aggressive search-space reduction
-- Adversarial state prediction using opponent-aware transitions
-- Dynamic MAX / MIN role selection based on active player
-- Heuristic evaluation refined from earlier planning agents
-- Move ordering and pruning optimizations for speed
+2) Minimax Search with Alpha-Beta Pruning (depth = 3 plies)
 
----
+Uses getNextStateAdversarial() to correctly simulate adversarial transitions.
 
-## Algorithmic Behavior
+Searches exactly 3 plies ahead (lookahead depth).
 
-- Explicitly models opponent decision-making
-- Selects actions that maximize worst-case outcomes
-- Evaluates both offensive and defensive strategies
-- Prunes branches that cannot influence final decisions
-- Balances search depth with strict runtime constraints
+MAX/MIN is selected dynamically based on state.whoseTurn, not by alternating depth, which matches the game’s turn mechanics.
 
----
+Evaluation Strategy (Hybrid Scoring)
 
-## Engineering Focus
+This agent blends two evaluators:
 
-- Uses adversarial state transitions instead of single-agent prediction
-- Designed for scalability under branching-factor explosion
-- Clean separation between evaluation, search, and control logic
-- Suitable for batch simulations and self-play evaluation
+A) Fast normalized utility (0..1)
+A “board-light” utility that stabilizes scoring using:
 
----
+food differential
 
-## Applications
+hill capture progress (enemy anthill capture health)
 
-The techniques demonstrated in this module are applicable to:
+queen survival
 
-- Competitive game AI
-- Multi-agent systems
-- Strategic planning and decision-making
-- Adversarial optimization problems
-- Autonomous agents operating in competitive environments
+attacker proximity pressure
 
----
+worker/carrying signals
 
-## Author
+queen safety penalties (threat / blocking hill)
 
-**Alex Anderson**  
-Electrical Engineering | Applied AI & Robotics  
-GitHub: `codeSolver123`
+B) Stronger symmetric score (swing-sensitive)
+A higher-variance evaluator that emphasizes tactical advantage:
+
+pressure on enemy queen/hill
+
+worker harassment and defense
+
+zone control near key structures
+
+army strength and threat penalties
+
+additional strategic shaping signals
+
+Final eval used in search: a weighted blend so search is tactical but doesn’t thrash.
+
+Performance Optimizations Implemented
+
+This file is designed to run quickly despite branching growth:
+
+Alpha-beta pruning (cuts branches that cannot affect the final decision)
+
+Move ordering (scores children early so pruning happens sooner)
+
+Killer-move heuristic (prioritizes moves that previously caused cutoffs)
+
+END-move ordering (pushes END toward the back when other actions exist)
+
+Top-N% child filtering (KEEP_TOP_PCT) to reduce branching factor
+
+Hard child cap (MAX_CHILDREN) to enforce runtime bounds
+
+Small tie jitter to reduce loops / repetitive behavior
+
+These are practical techniques used in real adversarial search systems to keep decision-making within time constraints.
+
+Why This Matters (Employer Context)
+
+This module demonstrates applied AI engineering skills in:
+
+adversarial planning / multi-agent decision-making
+
+alpha-beta pruning + search-space reduction
+
+evaluation function design and shaping
+
+performance tuning under branching-factor explosion
+
+combining fast heuristics with deeper strategic lookahead
+
+Author
+
+Alex Anderson (with Carter Rhoades)
+Electrical Engineering | Applied AI & Robotics
+GitHub: codeSolver123
