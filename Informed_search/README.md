@@ -9,7 +9,7 @@ The implementations progress from shallow informed evaluation to full multi-step
 
 Best-First Search Agent
 
-File: best_first_search_agent.py
+File: BFS_search-Random.py
 
 Description
 
@@ -31,7 +31,7 @@ This agent establishes the foundation for planning by demonstrating how heuristi
 
 A* Planning Agent
 
-File: Ghost_anderale26_oliveros27.py
+File: Astar_ghost.py
 
 Description
 
