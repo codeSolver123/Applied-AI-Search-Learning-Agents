@@ -1,0 +1,110 @@
+# Neural Network–Based Evaluation Agents
+
+## Overview
+
+This module implements **artificial neural networks for learned state evaluation and decision-making** in a dynamic, adversarial environment.
+
+Instead of relying solely on hand-crafted heuristics, these agents learn to approximate a utility function using supervised learning and gradient-based optimization. This mirrors real-world AI systems where explicit scoring rules are replaced by learned models.
+
+The implementation progresses from building a neural network from scratch to integrating it into an autonomous decision-making agent.
+
+---
+
+## Neural Network Architecture
+
+The neural network is implemented manually without external machine learning frameworks.
+
+**Architecture highlights:**
+- Feedforward neural network
+- Two-layer design (hidden + output)
+- Sigmoid activation functions
+- Fully differentiable for backpropagation
+- Randomized weight initialization
+- Continuous output in the range 0–1
+
+The output represents a learned **utility score** describing how favorable a given state is for the agent.
+
+---
+
+## Core Files
+
+### NeuralNetworks.py
+
+This file contains the neural network implementation, including:
+
+- Network structure and weight storage
+- Forward propagation (inference)
+- Sigmoid activation and derivative functions
+- Backpropagation logic for gradient descent
+- Weight update rules
+
+The network is designed to be flexible and extensible, allowing it to be reused for both training and runtime evaluation.
+
+---
+
+### trainingNN_helper.py
+
+This file manages the **training pipeline** for the neural network.
+
+Key responsibilities include:
+
+- Supplying structured training data
+- Executing epoch-based training
+- Randomized sampling of training inputs
+- Computing and tracking average error per epoch
+- Stopping training once convergence criteria are met
+
+The training process continues until the network reliably approximates the target utility function.
+
+---
+
+## Learned Utility Evaluation
+
+After training is complete:
+
+- Final network weights are preserved
+- Runtime evaluation uses **inference only**
+- No learning occurs during live decision-making
+- Neural evaluation replaces heuristic scoring entirely
+
+This ensures fast, deterministic behavior suitable for real-time agents.
+
+---
+
+## AI Concepts Demonstrated
+
+- Neural network design from first principles
+- Backpropagation and gradient descent
+- Function approximation
+- Supervised learning
+- Learned utility modeling
+- Replacing heuristic logic with trained models
+
+---
+
+## Engineering Focus
+
+- No external ML libraries required
+- Clear separation between training and inference
+- Deterministic runtime behavior
+- Modular design for integration with planning and learning agents
+
+---
+
+## Applications
+
+The techniques demonstrated here are applicable to:
+
+- Game AI and simulation
+- Robotics state evaluation
+- Autonomous decision-making systems
+- Learned cost and utility estimation
+- Hybrid symbolic + learning-based AI architectures
+
+---
+
+## Author
+
+**Alex Anderson**  
+Electrical Engineering | Applied AI & Robotics  
+GitHub: `codeSolver123`
