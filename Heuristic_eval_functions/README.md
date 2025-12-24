@@ -1,114 +1,101 @@
 Heuristic AI Agent (Rule-Based Decision Making)
 Overview
 
-This project implements a heuristic-based artificial intelligence agent for a turn-based strategy environment.
-The agent makes decisions using hand-crafted evaluation rules rather than search or learning, serving as a baseline for more advanced AI techniques.
+This module implements a heuristic-driven artificial intelligence agent for the Antics strategy game.
+The agent makes decisions using domain-specific rules and utility heuristics, without deep search or planning.
 
-This work demonstrates how domain knowledge can be encoded into an AI system to produce reliable, efficient behavior without expensive computation.
+This project demonstrates how effective behavior can emerge from carefully designed heuristics, tactical rules, and state evaluation—an essential foundation for later planning, adversarial search, and learning-based agents.
 
-AI Approach
+Heuristic Agent
 
-The agent evaluates game states using a heuristic utility function that estimates how favorable a position is for the player.
+File: Peacemaker_AI.py
+Agent Name: Peacemaker
 
-Key characteristics:
+Description
 
-Rule-based decision making
+The Peacemaker agent relies on structured heuristics and tactical rules to manage resources, control units, and apply pressure on the opponent. Instead of predicting many moves ahead, it prioritizes robust, fast, and stable gameplay under strict runtime constraints.
 
-Deterministic behavior (no learning required)
+The agent was designed to reliably defeat baseline opponents while remaining deterministic, safe, and self-consistent.
 
-Extremely fast execution
+Key Features
+Strategic Setup
 
-Stable performance across repeated games
+Deterministic home-side layout for predictable early-game structure
 
-The heuristic balances multiple objectives such as:
+Enemy food placed deep in opposing territory to delay scoring
 
-Resource collection efficiency
+Avoids risky midline placements
 
-Unit survival and positioning
+Resource Management
 
-Avoidance of high-risk situations
+Maintains a minimum of two worker ants
 
-Controlled offensive pressure
+Uses tunnels and anthill efficiently for food delivery
 
-This design avoids deep search and instead prioritizes consistent, explainable decisions.
+Routes workers using shortest-path distance estimation
 
-Heuristic Design
+Avoids unnecessary worker exposure to enemy units
 
-The utility function returns a normalized score representing how “good” the current state is for the agent.
+Combat & Pressure
 
-Factors considered include:
+Early soldier production after economic stability
 
-Current and relative resource levels
+Soldiers prioritize enemy structures (anthill, tunnels)
 
-Presence or absence of key units
+Opportunistic attacks when adjacent to enemy targets
 
-Proximity to objectives
+Pushes combat units into enemy territory instead of passive defense
 
-Risk exposure to enemy units
+Tactical Safety
 
-The heuristic is designed to:
+Queen management avoids blocking production
 
-Return values near 0.5 at the start of the game
+Target prioritization during attacks (queen > low-health units > proximity)
 
-Increase toward 1.0 as winning conditions approach
+Guaranteed termination without stalemates or crashes
 
-Decrease toward 0.0 in losing positions
+Engineering Focus
 
-This structure allows smooth decision gradients rather than abrupt behavior changes.
+Fully rule-based control logic (no search, no learning)
 
-Performance Goals
+No direct access to game internals or board mutation
 
-This agent was designed to:
+Deterministic, debuggable decision flow
 
-Reliably defeat baseline and random agents
+Runs consistently as either player
 
-Avoid crashes, deadlocks, or infinite loops
+Designed to scale into search-based and learning agents
 
-Play consistently as either player
+Why This Matters
 
-Complete games quickly enough for batch testing
+This agent demonstrates:
 
-It serves as a baseline AI for comparison with more advanced approaches such as search-based and learning-based agents.
+Practical heuristic design
 
-Role in the Larger Project
+Domain reasoning without brute-force computation
 
-This heuristic agent establishes:
+Real-time AI constraints and performance awareness
 
-A performance baseline
+Foundations for informed search, adversarial AI, and reinforcement learning
 
-A reference utility function
+Many production AI systems begin with rule-based controllers before introducing planning or learning layers—this project reflects that progression.
 
-A fallback decision system
+Applications
 
-Later agents in this repository build on this work by replacing or augmenting the heuristic with:
+Relevant to:
 
-Informed search (A*, minimax)
+Game AI foundations
 
-Neural network evaluation
+Rule-based autonomous agents
 
-Reinforcement and temporal-difference learning
+Robotics behavior control
 
-Files
+Decision systems under real-time constraints
 
-hw1_peacemaker_anderale26.py
-Heuristic AI agent implementation
-
-Only agent logic is included. The underlying simulation environment remains unchanged.
-
-Skills Demonstrated
-
-Heuristic design
-
-AI decision modeling
-
-Performance-constrained programming
-
-Debugging autonomous agents
-
-Clean separation of logic and environment
+Hybrid AI architectures (rules + learning)
 
 Author
 
 Alex Anderson
-Electrical Engineering — AI & Robotics Focus
+Electrical Engineering | Applied AI & Robotics
 GitHub: codeSolver123
