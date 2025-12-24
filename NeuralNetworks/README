@@ -1,110 +1,115 @@
-# Neural Network–Based Evaluation Agents
+# Neural Network–Based Utility Learning Agents
 
 ## Overview
 
-This module implements **artificial neural networks for learned state evaluation and decision-making** in a dynamic, adversarial environment.
+This module implements **artificial neural networks for learning and approximating utility functions** in a dynamic decision-making environment.
 
-Instead of relying solely on hand-crafted heuristics, these agents learn to approximate a utility function using supervised learning and gradient-based optimization. This mirrors real-world AI systems where explicit scoring rules are replaced by learned models.
+Instead of relying on manually tuned heuristics, these agents learn how to evaluate states using supervised learning and gradient-based optimization. This approach mirrors real-world AI systems where scoring, cost, or value functions are learned directly from data rather than hand-coded.
 
-The implementation progresses from building a neural network from scratch to integrating it into an autonomous decision-making agent.
+The work progresses from a minimal neural network built from first principles to a higher-dimensional network integrated into an autonomous agent.
 
 ---
 
-## Neural Network Architecture
+## Project Structure
 
-The neural network is implemented manually without external machine learning frameworks.
+Neural-Networks/
+├── NeuralNetworks.py
+├── MinDiffNN.py
 
-**Architecture highlights:**
-- Feedforward neural network
-- Two-layer design (hidden + output)
+yaml
+Copy code
+
+Each file represents a different stage of neural network application.
+
+---
+
+## NeuralNetworks.py  
+### Foundational Neural Network Implementation
+
+This file implements a **fully custom feedforward neural network** without using external machine learning libraries.
+
+### Key Features
+
+- Two-layer architecture (hidden + output)
+- 4 input features
+- 8 hidden neurons
+- 1 output neuron
 - Sigmoid activation functions
-- Fully differentiable for backpropagation
 - Randomized weight initialization
-- Continuous output in the range 0–1
+- Manual backpropagation using gradient descent
+- Bias handling at both layers
 
-The output represents a learned **utility score** describing how favorable a given state is for the agent.
+The network is trained using repeated epochs on randomly sampled input vectors until the average prediction error converges below a target threshold.
 
----
+### Purpose
 
-## Core Files
+This implementation demonstrates:
 
-### NeuralNetworks.py
+- Neural networks built from first principles
+- Forward propagation and inference
+- Backpropagation and weight updates
+- Supervised learning and error minimization
+- Numerical stability and convergence behavior
 
-This file contains the neural network implementation, including:
-
-- Network structure and weight storage
-- Forward propagation (inference)
-- Sigmoid activation and derivative functions
-- Backpropagation logic for gradient descent
-- Weight update rules
-
-The network is designed to be flexible and extensible, allowing it to be reused for both training and runtime evaluation.
+This file establishes the learning foundation used by later AI agents.
 
 ---
 
-### trainingNN_helper.py
+## MinDiffNN.py  
+### Learned Utility Evaluation Agent
 
-This file manages the **training pipeline** for the neural network.
+This file applies neural networks to **state evaluation in an adversarial environment**.
 
-Key responsibilities include:
+Rather than computing a utility score using hand-crafted logic, the neural network is trained to **approximate an existing heuristic utility function**. Once trained, the network replaces the heuristic entirely during live decision-making.
 
-- Supplying structured training data
-- Executing epoch-based training
-- Randomized sampling of training inputs
-- Computing and tracking average error per epoch
-- Stopping training once convergence criteria are met
+### Key Features
 
-The training process continues until the network reliably approximates the target utility function.
+- High-dimensional input mapping (normalized to 0–1)
+- Neural network trained to approximate state utility
+- Learned evaluation replaces heuristic scoring
+- Inference-only evaluation during gameplay
+- Deterministic runtime behavior for performance-critical use
+
+The network learns patterns in state structure and outcomes, enabling faster and more adaptive decision-making compared to static heuristics.
 
 ---
 
-## Learned Utility Evaluation
+## Engineering Approach
 
-After training is complete:
-
-- Final network weights are preserved
-- Runtime evaluation uses **inference only**
-- No learning occurs during live decision-making
-- Neural evaluation replaces heuristic scoring entirely
-
-This ensures fast, deterministic behavior suitable for real-time agents.
+- Clean separation between training and inference
+- Backpropagation retained for reproducibility and analysis
+- Learned weights embedded directly for runtime evaluation
+- No modification to the underlying simulation framework
+- Designed for extensibility into search and reinforcement learning systems
 
 ---
 
 ## AI Concepts Demonstrated
 
-- Neural network design from first principles
-- Backpropagation and gradient descent
-- Function approximation
+- Neural networks from scratch
 - Supervised learning
-- Learned utility modeling
-- Replacing heuristic logic with trained models
-
----
-
-## Engineering Focus
-
-- No external ML libraries required
-- Clear separation between training and inference
-- Deterministic runtime behavior
-- Modular design for integration with planning and learning agents
+- Gradient descent optimization
+- Function approximation
+- Utility modeling
+- Replacing symbolic heuristics with learned models
+- Hybrid learning + planning architectures
 
 ---
 
 ## Applications
 
-The techniques demonstrated here are applicable to:
+The techniques demonstrated here are directly applicable to:
 
-- Game AI and simulation
-- Robotics state evaluation
-- Autonomous decision-making systems
-- Learned cost and utility estimation
-- Hybrid symbolic + learning-based AI architectures
+- Game AI
+- Robotics decision systems
+- Learned cost and reward modeling
+- Autonomous planning systems
+- Hybrid symbolic–learning AI architectures
 
 ---
 
 ## Author
 
 **Alex Anderson**  
-Electrical Engineering | Applied AI & Robotics  
+Electrical Engineering | Applied Artificial Intelligence & Robotics  
 GitHub: `codeSolver123`
