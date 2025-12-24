@@ -6,61 +6,61 @@ This module implements an **adversarial search–based artificial intelligence a
 
 Unlike heuristic or informed-search agents that assume a passive environment, this agent explicitly models an **intelligent opponent** and selects actions by anticipating and countering adversarial behavior.
 
-The result is a decision-making system capable of **strategic planning under competition**, a core concept in game theory, multi-agent systems, and competitive AI.
+This demonstrates core concepts from **game theory, multi-agent systems, and strategic decision-making**, while maintaining real-time performance constraints.
 
 ---
 
 ## Minimax with Alpha-Beta Pruning Agent
 
-**File:** `minimax_alpha_beta_agent.py`
+**File:** `MiniMax_Gardner.py`
 
 ### Description
 
-The agent performs a depth-limited Minimax search to evaluate future game states under optimal play by both itself and its opponent. Alpha-beta pruning is applied to significantly reduce the number of explored nodes, enabling deeper lookahead while maintaining performance.
+The agent performs a depth-limited Minimax search to evaluate future game states under optimal play by both itself and its opponent. Alpha-beta pruning is applied to significantly reduce the number of explored nodes, enabling deeper lookahead while maintaining computational efficiency.
 
-Unlike traditional textbook examples, maximizing and minimizing decisions are determined dynamically based on **whose turn it is in the game state**, not purely on tree depth.
+Unlike simplified textbook examples, maximizing and minimizing decisions are determined dynamically based on **whose turn it is in the game state**, rather than strictly alternating by tree depth.
 
 ---
 
 ## Key Features
 
 - Depth-limited Minimax search (≥ 3 plies)
-- Alpha-beta pruning for search-space reduction
+- Alpha-beta pruning for aggressive search-space reduction
 - Adversarial state prediction using opponent-aware transitions
-- Dynamic MAX / MIN role assignment based on active player
-- Heuristic evaluation reused and refined from earlier agents
+- Dynamic MAX / MIN role selection based on active player
+- Heuristic evaluation refined from earlier planning agents
 - Move ordering and pruning optimizations for speed
 
 ---
 
 ## Algorithmic Behavior
 
-- Models the opponent as a rational decision-maker
-- Evaluates both offensive and defensive outcomes
-- Selects actions that maximize worst-case utility
-- Prunes branches that cannot affect the final decision
-- Balances search depth with real-time performance constraints
+- Explicitly models opponent decision-making
+- Selects actions that maximize worst-case outcomes
+- Evaluates both offensive and defensive strategies
+- Prunes branches that cannot influence final decisions
+- Balances search depth with strict runtime constraints
 
 ---
 
 ## Engineering Focus
 
-- Uses adversarial state transitions rather than single-agent prediction
-- Designed for scalability and performance under tight time limits
-- Clean separation between evaluation, search logic, and control flow
-- Compatible with batch simulations and self-play evaluation
+- Uses adversarial state transitions instead of single-agent prediction
+- Designed for scalability under branching-factor explosion
+- Clean separation between evaluation, search, and control logic
+- Suitable for batch simulations and self-play evaluation
 
 ---
 
 ## Applications
 
-The techniques demonstrated in this module are directly applicable to:
+The techniques demonstrated in this module are applicable to:
 
 - Competitive game AI
 - Multi-agent systems
-- Strategic planning under uncertainty
-- Decision-making in adversarial environments
-- Optimization problems involving competing objectives
+- Strategic planning and decision-making
+- Adversarial optimization problems
+- Autonomous agents operating in competitive environments
 
 ---
 
